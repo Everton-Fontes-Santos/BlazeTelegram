@@ -6,7 +6,7 @@ authors = ["Everton Fontes <efs.fontes@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.11"
 pydantic = "^2.3.0"
 pydantic-settings = "^2.0.3"
 fastapi = "^0.103.1"
