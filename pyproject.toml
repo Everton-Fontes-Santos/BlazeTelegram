@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "blazetelegrambot"
+version = "0.1.0"
+description = ""
+authors = ["Everton Fontes <efs.fontes@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pydantic = "^2.3.0"
+pydantic-settings = "^2.0.3"
+fastapi = "^0.103.1"
+pytest-trio = "^0.8.0"
+rich = "^13.5.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
