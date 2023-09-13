@@ -17,13 +17,13 @@ class EventFactory(BaseModel):
     mediator:Dispatcher| None = None
 
     @staticmethod
-    def create(name:str, data:str, occured:datetime|str=None)->DomainEvent:
+    def create(name:str, data:str, ocurred:datetime|str=None)->DomainEvent:
         time = datetime.now()
-        if occured and isinstance(occured, str):
-            time = datetime.strptime(occured, "%Y-%m-%d %H:%M:%S")
+        if ocurred and isinstance(ocurred, str):
+            time = datetime.strptime(ocurred, "%Y-%m-%d %H:%M:%S")
             
-        if occured and isinstance(occured, datetime):
-            time = occured
+        if ocurred and isinstance(ocurred, datetime):
+            time = ocurred
             
         return  DomainEvent(
             name=name,
@@ -32,13 +32,13 @@ class EventFactory(BaseModel):
         )
         
 
-    async def create_and_publish(self, name:str, data:str, occured:datetime|str=None)->DomainEvent:
+    async def create_and_publish(self, name:str, data:str, ocurred:datetime|str=None)->DomainEvent:
         time = datetime.now()
-        if occured and isinstance(occured, str):
-            time = datetime.strptime(occured, "%Y-%m-%d %H:%M:%S")
+        if ocurred and isinstance(ocurred, str):
+            time = datetime.strptime(ocurred, "%Y-%m-%d %H:%M:%S")
             
-        if occured and isinstance(occured, datetime):
-            time = occured
+        if ocurred and isinstance(ocurred, datetime):
+            time = ocurred
             
         event =  DomainEvent(
             name=name,

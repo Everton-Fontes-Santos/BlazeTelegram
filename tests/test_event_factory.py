@@ -11,12 +11,12 @@ async def test_create_event():
     updated_event = factory.create(
         name='updated',
         data='hello',
-        occured=time
+        ocurred=time
     )
     updated_event2 = await factory.create_and_publish(
         name='updated',
         data='hello',
-        occured=date_string
+        ocurred=date_string
     )
     
     assert updated_event.name == 'updated'
