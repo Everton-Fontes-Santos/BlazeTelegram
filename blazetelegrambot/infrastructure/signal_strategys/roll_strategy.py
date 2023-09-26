@@ -9,7 +9,7 @@ from ...domain.entitys.double import Double
 from ...interfaces.bet_factory import BetFactory
 
 
-class ColorStrategy(SignalStrategy):
+class RollStrategy(SignalStrategy):
     signal:int = 0
     pattern:list[int|list[int]] = []
     bet_factory:BetFactory = None
@@ -22,17 +22,18 @@ class ColorStrategy(SignalStrategy):
     
     def check_pattern(self, roulette:Roulette)->bool:
         if isinstance(self.pattern[0], list):
-            
+        
             for patt in self.pattern:
                 n_doubles = len(patt)
-                roll = [ double.color for double in roulette.last_n(n_doubles)]
-                
+                roll = [ double.roll for double in roulette.last_n(n_doubles)]
+                print(roll)
+                print(patt)
                 if patt ==  roll:
                     return True
             return False
         else:
             n_doubles = len(self.pattern)
-            roll = [ double.color for double in roulette.last_n(n_doubles)] 
+            roll = [ double.roll for double in roulette.last_n(n_doubles)] 
             return self.pattern ==  roll
     
     def create_bet(self, roulette:Roulette)->Bet:
