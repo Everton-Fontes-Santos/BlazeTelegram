@@ -26,8 +26,7 @@ class RollStrategy(SignalStrategy):
             for patt in self.pattern:
                 n_doubles = len(patt)
                 roll = [ double.roll for double in roulette.last_n(n_doubles)]
-                print(roll)
-                print(patt)
+                
                 if patt ==  roll:
                     return True
             return False
