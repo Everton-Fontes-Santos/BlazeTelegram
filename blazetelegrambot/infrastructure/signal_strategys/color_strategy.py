@@ -21,22 +21,20 @@ class ColorStrategy(SignalStrategy):
         return self.checker.check(self.actual_bet, double)
     
     def check_pattern(self, roulette:Roulette)->bool:
-        match self.read_type:
-            case 'color':
-                if isinstance(self.pattern[0], list):
-                    
-                    for patt in self.pattern:
-                        n_doubles = len(patt)
-                        roll = [ double.color for double in roulette.last_n(n_doubles)]
-                        print(roll)
-                        print(patt)
-                        if patt ==  roll:
-                            return True
-                    return False
-                else:
-                    n_doubles = len(self.pattern)
-                    roll = [ double.color for double in roulette.last_n(n_doubles)] 
-                    return self.pattern ==  roll
+        if isinstance(self.pattern[0], list):
+            
+            for patt in self.pattern:
+                n_doubles = len(patt)
+                roll = [ double.color for double in roulette.last_n(n_doubles)]
+                print(roll)
+                print(patt)
+                if patt ==  roll:
+                    return True
+            return False
+        else:
+            n_doubles = len(self.pattern)
+            roll = [ double.color for double in roulette.last_n(n_doubles)] 
+            return self.pattern ==  roll
     
     def create_bet(self, roulette:Roulette)->Bet:
         if self.bet_factory:
@@ -67,21 +65,3 @@ class ColorStrategy(SignalStrategy):
             
             self.changed = False
         self.changed = False
-                
-                
-# case 'roll':
-                
-#     if isinstance(self.pattern[0], list):
-        
-#         for patt in self.pattern:
-#             n_doubles = len(patt)
-#             roll = [ double.roll for double in roulette.last_n(n_doubles)]
-#             print(roll)
-#             print(patt)
-#             if patt ==  roll:
-#                 return True
-#         return False
-#     else:
-#         n_doubles = len(self.pattern)
-#         roll = [ double.roll for double in roulette.last_n(n_doubles)] 
-#         return self.pattern ==  roll
