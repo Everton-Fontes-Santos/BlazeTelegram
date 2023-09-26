@@ -7,6 +7,7 @@ from ..domain.entitys.roulette import Roulette
 
 
 class SignalStrategy(ABC, BaseModel):
+    actual_bet:Bet
         
     @abstractmethod
     def check_win(self, double:Double)->bool:
