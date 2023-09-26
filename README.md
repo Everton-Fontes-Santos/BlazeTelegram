@@ -12,6 +12,6 @@ Cada Handler apenas resolve o evento com seu nome igual, por tanto decidi criar 
 
 ## Tipos de Eventos:
 
-- [ ] roullete-updated -> Evento para cada vez que a roleta da blaze atualizar
-- [ ] double-signal-sended -> Evento para cada vez que um sinal for enviado
-- [ ] double-result-sended -> Evento para cada vez que um resultado de sinal for enviado
+- [x] roullete-updated -> Evento para cada vez que a roleta da blaze atualizar
+- [x] double-signal-sended -> Evento para cada vez que um sinal for enviado
+- [x] double-result-sended -> Evento para cada vez que um resultado de sinal for enviado

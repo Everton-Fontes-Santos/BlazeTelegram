@@ -46,7 +46,7 @@ class RouletteUpdatedHandler(Handler):
     
     async def check_bet_and_publish(self, strategy:SignalStrategy):
         if strategy.new_bet() and strategy.actual_bet:
-            await self.event_factory.create_and_publish("double-signal", strategy.actual_bet.model_dump_json())
+            await self.event_factory.create_and_publish("double-signal-sended", strategy.actual_bet.model_dump_json())
             
     async def check_bet_result_and_publish(self, strategy:SignalStrategy, roll:roulette.Roulette):
             
@@ -57,4 +57,4 @@ class RouletteUpdatedHandler(Handler):
                 signal=strategy.actual_bet.signal
             )  
         
-            await self.event_factory.create_and_publish("double-result", result.model_dump_json())
+            await self.event_factory.create_and_publish("double-result-sended", result.model_dump_json())
