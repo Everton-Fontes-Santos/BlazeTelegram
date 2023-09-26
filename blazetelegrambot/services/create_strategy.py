@@ -13,4 +13,6 @@ class CreateStrategy(Service):
     
     async def execute(self, input: dict[str, Any]) -> ServiceOutput | None:
         data = CreateInput(**input)
-        strategy = StrategyFactory.create(data.strategy_type)
+        strategy = StrategyFactory.create(data.strategy_type)      
+        
+        return strategy
