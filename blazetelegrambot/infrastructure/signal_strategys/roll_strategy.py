@@ -1,5 +1,4 @@
-
-from ...interfaces.signal_strategy import SignalStrategy
+from ...interfaces.signal_strategy import SignalStrategy, Pattern
 from ...interfaces.checker import Checker
 
 from ...domain.entitys.bet import Bet
@@ -11,12 +10,15 @@ from ...interfaces.bet_factory import BetFactory
 
 class RollStrategy(SignalStrategy):
     signal:int = 0
-    pattern:list[int|list[int]] = []
+    pattern:list[Pattern] | Pattern = []
     bet_factory:BetFactory = None
     actual_bet:Bet = None
     changed:bool = False
     checker:Checker
     
+    def set_pattern(self, pattern: Pattern | list[Pattern]):
+        self.pattern = pattern
+        
     def check_win(self, double:Double):
         return self.checker.check(self.actual_bet, double)
     

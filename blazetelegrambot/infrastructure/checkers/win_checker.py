@@ -3,7 +3,7 @@ from datetime import datetime
 
 from ...interfaces.checker import Checker, Bet, Double
 
-class Checker(Checker):
+class WinChecker(Checker):
     counter:int = 0    
 
     def can_check(self, bet:Bet, time:datetime)->bool:

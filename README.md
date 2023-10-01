@@ -15,3 +15,15 @@ Cada Handler apenas resolve o evento com seu nome igual, por tanto decidi criar 
 - [x] roullete-updated -> Evento para cada vez que a roleta da blaze atualizar
 - [x] double-signal-sended -> Evento para cada vez que um sinal for enviado
 - [x] double-result-sended -> Evento para cada vez que um resultado de sinal for enviado
+- [ ] data-updated -> Evento para cada vez que a roleta da casa de apostas atualizar
+
+# Handlers:
+
+- [ ] roullete-updated -> Responsável por checar em cada estratégia se a roleta atual pode enviar um sinal ou resultado
+- [ ] double-signal-sended -> Este handler irá enviar uma mensagem para os grupos escolhidos com os sinais
+- [ ] double-result-sended -> Irá enviar uma mensagem de resultado de sinais para os grupos escolhidos
+
+# Serviços:
+
+- [ ] add-double -> Responsável em criar um evento de roullete-updated toda vez que consumir um novo dado.
+- [ ] create-strategy -> Cria 

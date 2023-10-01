@@ -1,19 +1,11 @@
-from typing import Literal
-
+from blazetelegrambot.interfaces.signal_strategy import Pattern
 from ...interfaces.bet_factory import BetFactory
 from ...interfaces.checker import Checker
-from ...interfaces.signal_strategy import SignalStrategy
+from ...interfaces.signal_strategy import SignalStrategy, Pattern
 
 from ...domain.entitys.bet import Bet
 from ...domain.entitys.double import Double
 from ...domain.entitys.roulette import Roulette
-
-
-Rolls = Literal[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
-Colors = Literal['black', 'red', 'white']
-Any_type = Literal['any']
-
-Pattern = list[Rolls | Colors | Any_type]
 
 class ColorAndRollStrategy(SignalStrategy):
     signal:int = 0
@@ -22,6 +14,9 @@ class ColorAndRollStrategy(SignalStrategy):
     actual_bet:Bet = None
     changed:bool = False
     checker:Checker
+    
+    def set_pattern(self, pattern: Pattern | list[Pattern]):
+        self.pattern = pattern
     
     def check_win(self, double:Double):
         return self.checker.check(self.actual_bet, double)
