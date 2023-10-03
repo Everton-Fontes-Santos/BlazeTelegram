@@ -26,4 +26,4 @@ Cada Handler apenas resolve o evento com seu nome igual, por tanto decidi criar 
 # Serviços:
 
 - [ ] add-double -> Responsável em criar um evento de roullete-updated toda vez que consumir um novo dado.
-- [ ] create-strategy -> Cria 
+- [ ] create-strategy -> Cria uma strategya com o tipo escolhido

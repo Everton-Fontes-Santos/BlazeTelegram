@@ -1,6 +1,6 @@
 from pydantic import BaseModel
-
-from ...interfaces.signal_strategy import SignalStrategy
+from typing import Literal
+from .signal_strategy import SignalStrategy, Pattern
 
 
 from datetime import datetime
@@ -13,9 +13,6 @@ class StrategyFactory(BaseModel):
     Returns:
         SignalStrategy: The strategy of type choosed
     """
-    
-
-    @staticmethod
-    def create(strategy_type:str)->SignalStrategy:
+    def create(self, signal:Literal[0,1,2,3], pattern:Pattern, broker:str)->SignalStrategy:
         ...
-        
+    
