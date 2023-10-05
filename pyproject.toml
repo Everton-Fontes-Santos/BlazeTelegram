@@ -12,6 +12,7 @@ pydantic-settings = "^2.0.3"
 fastapi = "^0.103.1"
 pytest-trio = "^0.8.0"
 rich = "^13.5.2"
+telethon = "^1.30.3"
 
 
 [build-system]

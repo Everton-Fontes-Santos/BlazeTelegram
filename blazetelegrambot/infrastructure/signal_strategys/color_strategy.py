@@ -55,7 +55,7 @@ class ColorStrategy(SignalStrategy):
             if not self.actual_bet:
                 self.actual_bet = self.create_bet(roulette)
                 self.changed = True
-                return
+                return True
 
                 
             if self.actual_bet and not self.check_active_bet(roulette):
@@ -63,7 +63,8 @@ class ColorStrategy(SignalStrategy):
                 if bet != self.actual_bet:
                     self.actual_bet = bet
                     self.changed = True
-                    return
+                    return True
             
             self.changed = False
         self.changed = False
+        return False

@@ -35,5 +35,5 @@ class SignalStrategy(ABC, BaseModel):
         ...
     
     @abstractmethod
-    def check(self, roulette:Roulette)->None:
+    def check(self, roulette:Roulette)->bool:
         ...
