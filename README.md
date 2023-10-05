@@ -19,11 +19,12 @@ Cada Handler apenas resolve o evento com seu nome igual, por tanto decidi criar 
 
 # Handlers:
 
-- [ ] roullete-updated -> Responsável por checar em cada estratégia se a roleta atual pode enviar um sinal ou resultado
-- [ ] double-signal-sended -> Este handler irá enviar uma mensagem para os grupos escolhidos com os sinais
+- [x] roullete-updated -> Responsável por checar em cada estratégia se a roleta atual pode enviar um sinal ou resultado
+- [x] double-signal-sended -> Este handler irá enviar uma mensagem para os grupos escolhidos com os sinais
 - [ ] double-result-sended -> Irá enviar uma mensagem de resultado de sinais para os grupos escolhidos
 
 # Serviços:
 
-- [ ] add-double -> Responsável em criar um evento de roullete-updated toda vez que consumir um novo dado.
-- [ ] create-strategy -> Cria uma strategya com o tipo escolhido
+- [x] add-double -> Responsável em criar um evento de roullete-updated toda vez que consumir um novo dado.
+- [x] create-strategy -> Cria uma estrategia com o tipo escolhido
+- [x] transform_bet_to_msg -> Transforma uma aposta criada com a estratégia  em uma mensagem para ser mandada para o grupo
