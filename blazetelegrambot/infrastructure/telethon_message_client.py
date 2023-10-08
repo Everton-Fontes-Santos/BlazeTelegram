@@ -6,4 +6,5 @@ class TelethonMessage(MessageClient):
     client:TelegramClient
     
     async def send_message(self, msg: str, id_to_send: str | int) -> None:
-        await self.client.send_message(id_to_send, msg)
+        with self.client:
+            await self.client.send_message(id_to_send, msg)
