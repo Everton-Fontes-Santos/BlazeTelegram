@@ -71,6 +71,9 @@ async def main():
         client=message_client.client
     )
 
+    sender_handler.addIds('color', config.COLOR_PAID_GROUP)
+    sender_handler.addIds('white', config.WHITE_PAID_GROUP)
+    
     mediator.register(sender_handler)
 
     await presenter.listen()

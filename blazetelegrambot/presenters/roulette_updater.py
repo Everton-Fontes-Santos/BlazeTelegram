@@ -16,7 +16,10 @@ class RouletteUpdater(Presenter):
     
     async def listen(self) -> None:
         while self.running:
-            actual_roulette = await self.roulette_checker.execute({})
+            try:
+                actual_roulette = await self.roulette_checker.execute({})
+            except:
+                pass
             
             if self.last_double and actual_roulette.last() != self.last_double:
                 self.last_double = actual_roulette.last()

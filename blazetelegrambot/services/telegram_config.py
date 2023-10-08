@@ -8,3 +8,5 @@ class TelegramConfig(BaseSettings):
     BOT_TOKEN:str
     API_ID:str
     API_HASH:str
+    WHITE_PAID_GROUP:int
+    COLOR_PAID_GROUP:int
