@@ -36,7 +36,7 @@ class ColorStrategy(SignalStrategy):
         else:
             n_doubles = len(self.pattern)
             roll = [ double.color for double in roulette.last_n(n_doubles)] 
-            return self.pattern ==  roll
+            return self.pattern == roll
     
     def create_bet(self, roulette:Roulette)->Bet:
         if self.bet_factory:

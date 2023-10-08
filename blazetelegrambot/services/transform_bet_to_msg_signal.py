@@ -23,9 +23,10 @@ class MsgOutPut(ServiceOutput):
 class TransformMsgInput(ServiceInput):
     bet:Bet
 
-class TransformBetToMsg(Service):
+class TransformBetToMsgSignal(Service):
     
     def execute(self, input: Input) -> MsgOutPut:
+        input['mid_time'] = input['init_time'] if not input['mid_time'] else input['mid_time']
         bet = Bet(**input)
         
         return self.transform_bet_in_message(bet)    
@@ -59,7 +60,7 @@ class TransformBetToMsg(Service):
             msg = self.process_white_time(bet.start_time, msg_text)
             if msg:
                 send_msg = "Método High White - Sinais de Branco \n\n" 
-                send_msg += msg_text
+                send_msg += msg
                 send_msg += f'\nTenha Gerenciamento consistente! Bora Alavancar !'
                 color = 'white'
         else:

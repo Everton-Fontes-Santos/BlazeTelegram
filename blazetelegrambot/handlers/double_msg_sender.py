@@ -9,12 +9,13 @@ import json
 
 IDS = list[str|int]
 
-class DoubleSignalSenderHandler(Handler):
+class DoubleMsgSenderHandler(Handler):
     name:str = 'roullete-updated'
     strategys:list[SignalStrategy]
     send_to:dict[str, IDS] = {}
     client:MessageClient
-    transform_bet_to_msg:Service
+    transform_bet_to_msg_signal:Service
+    transform_bet_to_msg_result:Service
     
     
     def addIds(self, color_name:str, *ids:str|int)->None:
@@ -27,10 +28,21 @@ class DoubleSignalSenderHandler(Handler):
         if self.name != event.name:
             return
         
-        roulette = Roulette(json.loads(event.data))
+        roulette = Roulette(**json.loads(event.data))
+        
         for strategy in self.strategys:
+            
+            #send result
+            if strategy.actual_bet and strategy.check_win(roulette.last()):
+                output = self.transform_bet_to_msg_result.execute(strategy.actual_bet.model_dump())
+                if output and output.color in self.send_to.keys():
+                    for id in self.send_to[output.color]:
+                        await self.client.send_message(output.text, id)
+                
+            #send signals
             if strategy.check(roulette):
-                output = self.transform_bet_to_msg.execute(strategy.actual_bet.model_dump())
+                
+                output = self.transform_bet_to_msg_signal.execute(strategy.actual_bet.model_dump())
                 if output.color in self.send_to.keys():
                     for id in self.send_to[output.color]:
                         await self.client.send_message(output.text, id)
