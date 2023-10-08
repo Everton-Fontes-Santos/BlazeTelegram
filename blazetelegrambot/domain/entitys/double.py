@@ -8,6 +8,9 @@ class Double(BaseModel):
     creation_time:datetime
     broker:str
     
+    def __eq__(self, __value: Double) -> bool:
+        return self.creation_time.time() == __value.creation_time.time()
+    
     def next_time(self)->datetime:
         return self.creation_time + timedelta(seconds=30)
     

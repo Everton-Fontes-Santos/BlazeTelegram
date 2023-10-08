@@ -9,11 +9,14 @@ from ..interfaces.http import HTTPClient
 
 from datetime import timedelta
 
+class OutPut(ServiceOutput):
+    roulette:Roulette
+
 class RouletteChecker(Service):
     web_client:HTTPClient
     url_latest:str = "https://blaze.com/api/roulette_games/recent"
     
-    async def execute(self, input: dict[str, Any]):
+    async def execute(self, _: dict[str, Any])->OutPut:
         data = await self.web_client.get(self.url_latest)
         roulette = Roulette()
         if not data:

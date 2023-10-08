@@ -17,8 +17,8 @@ class CreateTelegramMessageClient(Service):
     
     async def execute(self, input: dict[str, Any]):
         _input = Input(**input)
-        client = TelegramClient(_input.session_name, _input.api_id, _input.api_hash, base_logger=logger)
-        client = client.start(bot_token=_input.bot_token)
+        client = TelegramClient(_input.session_name, _input.api_id, _input.api_hash)
+        await client.start(bot_token=_input.bot_token)
         
         message = TelethonMessage(client=client)
         return Output(client=message)
