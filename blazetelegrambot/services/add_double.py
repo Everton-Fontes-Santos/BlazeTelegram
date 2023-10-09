@@ -18,4 +18,4 @@ class AddDouble(Service):
         self.roulette.add(*_input.doubles)
         
         
-        await self.event_factory.create_and_publish("roulette-updated", self.roulette.model_dump_json())
+        await self.event_factory.create_and_publish("roullete-updated", self.roulette.model_dump_json())

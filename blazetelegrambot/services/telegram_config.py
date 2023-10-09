@@ -10,3 +10,5 @@ class TelegramConfig(BaseSettings):
     API_HASH:str
     WHITE_PAID_GROUP:int
     COLOR_PAID_GROUP:int
+    WHITE_FREE_GROUP:str
+    COLOR_FREE_GROUP:str

@@ -31,6 +31,7 @@ async def main():
     rou_checker = roulette_checker.RouletteChecker(web_client=http)
     output = await rou_checker.execute(None)
     roulette = output.roulette
+    # roulette = Roulette()
     #create message client
     message_client_service = create_telegram_message_client.CreateTelegramMessageClient()
     message_client = await message_client_service.execute({
@@ -69,16 +70,18 @@ async def main():
         strategys=[red_strategy.strategy, black_strategy.strategy, white_strategy.strategy],
         transform_bet_to_msg_result=transform_bet_to_msg_result.TransformBetToMsgResult(),
         transform_bet_to_msg_signal=transform_bet_to_msg_signal.TransformBetToMsgSignal(),
-        client=message_client.client
+        client=message_client.client,
+        msg_free_counter=2
     )
 
     sender_handler.addIds('color', config.COLOR_PAID_GROUP)
     sender_handler.addIds('white', config.WHITE_PAID_GROUP)
+    sender_handler.addIds('color', True, config.WHITE_FREE_GROUP)
+    sender_handler.addIds('white', True, config.WHITE_FREE_GROUP)
     
     mediator.register(sender_handler)
 
     await presenter.listen()
-    message_client.client.client.run_until_disconnected()
     
 if __name__ == '__main__':
     asyncio.run(main())

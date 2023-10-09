@@ -17,6 +17,13 @@ class MockMessage(MessageClient):
         self.msgs.append(
             ( id_to_send , msg )
         )
+    
+    async def send_message_by_count(self, msg: str, id_to_send: str | int, count: int) -> None:
+        if self.counter % count == 0:
+            self.msgs.append(
+            ( id_to_send , msg )
+        )
+            
         
         
 async def test_signal_sender():
