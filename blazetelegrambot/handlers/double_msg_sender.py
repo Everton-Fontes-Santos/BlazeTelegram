@@ -30,11 +30,14 @@ class DoubleMsgSenderHandler(Handler):
         
         roulette = Roulette(**json.loads(event.data))
         
+        print("roullete")
+        
         for strategy in self.strategys:
             
             #send result
             if strategy.actual_bet and strategy.check_win(roulette.last()):
                 output = self.transform_bet_to_msg_result.execute(strategy.actual_bet.model_dump())
+                print("Cheking Result")
                 if output and output.color in self.send_to.keys():
                     for id in self.send_to[output.color]:
                         await self.client.send_message(output.text, id)
@@ -43,6 +46,7 @@ class DoubleMsgSenderHandler(Handler):
             if strategy.check(roulette):
                 
                 output = self.transform_bet_to_msg_signal.execute(strategy.actual_bet.model_dump())
+                print("Checking Signal")
                 if output.color in self.send_to.keys():
                     for id in self.send_to[output.color]:
                         await self.client.send_message(output.text, id)

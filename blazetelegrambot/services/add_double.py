@@ -3,6 +3,8 @@ from ..domain.entitys import roulette, double
 
 from ..interfaces.service import Service, ServiceInput
 
+from rich import print
+
 class Input(ServiceInput):
     doubles:list[double.Double]
 

@@ -25,7 +25,7 @@ class RouletteChecker(Service):
         doubles = handle_data(data)
         roulette.add(*doubles[::-1])
 
-        return roulette
+        return OutPut(roulette=roulette)
     
     
     

@@ -19,17 +19,18 @@ import asyncio
 
 async def main():
     config = TelegramConfig()
-    roulette = Roulette()
+    
     http = HTTPXClient()
     #create the mediator
-    event_factory = EventFactory()
     mediator = MemoryDispatcher()
+    event_factory = EventFactory(mediator=mediator)
     log = log_handler.LogHandler()
     #register log service
     mediator.register(log)
 
     rou_checker = roulette_checker.RouletteChecker(web_client=http)
-
+    output = await rou_checker.execute(None)
+    roulette = output.roulette
     #create message client
     message_client_service = create_telegram_message_client.CreateTelegramMessageClient()
     message_client = await message_client_service.execute({
@@ -65,7 +66,7 @@ async def main():
     })
 
     sender_handler = double_msg_sender.DoubleMsgSenderHandler(
-        strategys=[red_strategy, black_strategy, white_strategy],
+        strategys=[red_strategy.strategy, black_strategy.strategy, white_strategy.strategy],
         transform_bet_to_msg_result=transform_bet_to_msg_result.TransformBetToMsgResult(),
         transform_bet_to_msg_signal=transform_bet_to_msg_signal.TransformBetToMsgSignal(),
         client=message_client.client

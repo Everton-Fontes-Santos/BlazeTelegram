@@ -25,4 +25,4 @@ class CreateStrategy(Service):
         data = CreateInput(**input)
         strategy = self.strategy_factory.create(data.signal, data.pattern, data.broker)      
         
-        return strategy
+        return CreateOutput(strategy=strategy)

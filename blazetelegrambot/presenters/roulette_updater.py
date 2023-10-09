@@ -4,6 +4,7 @@ from ..domain.entitys.double import Double
 from ..domain.factory.event_factory import EventFactory
 
 import time
+from rich import print
 
 class RouletteUpdater(Presenter):
     roulette_checker:Service
@@ -17,9 +18,10 @@ class RouletteUpdater(Presenter):
     async def listen(self) -> None:
         while self.running:
             try:
-                actual_roulette = await self.roulette_checker.execute({})
+                output = await self.roulette_checker.execute({})
+                actual_roulette = output.roulette
             except:
-                pass
+                continue
             
             if self.last_double and actual_roulette.last() != self.last_double:
                 self.last_double = actual_roulette.last()
