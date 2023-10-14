@@ -5,7 +5,7 @@ from blazetelegrambot.services import (
     add_double, create_strategy, transform_bet_to_msg_result, transform_bet_to_msg_signal,
     create_telegram_message_client, roulette_checker
 )
-from blazetelegrambot.domain.entitys.roulette import Roulette
+
 from blazetelegrambot.infrastructure.httpx_client import HTTPXClient
 from blazetelegrambot.domain.factory.event_factory import EventFactory
 from blazetelegrambot.services.factorys import (
@@ -13,7 +13,10 @@ from blazetelegrambot.services.factorys import (
 )
 from blazetelegrambot.dispatchers.MemoryDispatcher import MemoryDispatcher
 from blazetelegrambot.presenters.roulette_updater import RouletteUpdater
-from blazetelegrambot.services.telegram_config import TelegramConfig
+from blazetelegrambot.services.config import TelegramConfig, APIConfig
+from blazetelegrambot.presenters.api.api_presenter import FastAPIPresenter
+from blazetelegrambot.presenters.api.handler import HealthCheckHandler
+
 
 import asyncio
 
@@ -80,6 +83,11 @@ async def main():
     sender_handler.addIds('white', True, config.WHITE_FREE_GROUP)
     
     mediator.register(sender_handler)
+
+    api_config = APIConfig()
+    api = FastAPIPresenter(port=api_config.PORT)
+    api.init_presenter()
+    await api.listen()
 
     await presenter.listen()
     
