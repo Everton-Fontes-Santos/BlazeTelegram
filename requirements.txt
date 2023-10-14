@@ -5,3 +5,4 @@ pytest-trio==0.8.0
 rich==13.5.2
 telethon==1.30.3
 httpx==0.25.0
+uvicorn==0.22.0
