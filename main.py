@@ -17,8 +17,9 @@ from blazetelegrambot.services.config import TelegramConfig, APIConfig
 from blazetelegrambot.presenters.api.api_presenter import FastAPIPresenter
 from blazetelegrambot.presenters.api.handler import HealthCheckHandler
 
-
+from datetime import datetime
 import asyncio
+
 
 async def main():
     config = TelegramConfig()
@@ -86,10 +87,27 @@ async def main():
 
     api_config = APIConfig()
     api = FastAPIPresenter(port=api_config.PORT)
+    health = HealthCheckHandler()
+    api.register(health)
     api.init_presenter()
-    await api.listen()
+    
+    
+    await asyncio.gather(
+        asyncio.create_task(check_by_five()),
+        asyncio.create_task(api.listen(False)),
+        asyncio.create_task(presenter.listen()),
+    )    
 
     await presenter.listen()
-    
+
+
+async def check_by_five():
+    client = HTTPXClient()
+    while True:
+        if datetime.now().minute % 5 == 0 and datetime.now().second == 0:
+            await client.get('https://blaze-telegram-service.onrender.com/healthcheck', timeout=10)
+        
+        await asyncio.sleep(1)
+
 if __name__ == '__main__':
     asyncio.run(main())
