@@ -12,6 +12,9 @@ class FastAPIPresenter(Presenter):
     api:FastAPI
     started:bool = False
     
+    class Config:
+        arbitrary_types_allowed=True
+    
     def init_presenter(self):
         self.api.add_middleware(
             CORSMiddleware,

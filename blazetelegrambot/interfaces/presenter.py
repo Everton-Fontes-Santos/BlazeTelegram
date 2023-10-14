@@ -4,6 +4,7 @@ from pydantic import BaseModel
 
 class Presenter(ABC, BaseModel):
     
+    
     @abstractmethod
     def stop(self)->None:
         ...
