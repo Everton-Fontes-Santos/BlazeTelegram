@@ -36,10 +36,10 @@ class FastAPIPresenter(Presenter):
             raise Exception("You need start the presenter before running")
             
         if not in_thread:
-            uvicorn.run(self.app, port=self.port, reload=True)
+            uvicorn.run(self.api, port=self.port, reload=True)
             return
         
-        run_thread = Thread(target=uvicorn.run, kwargs={"port":self.port, "reload":True, "host":"0.0.0.0"})
+        run_thread = Thread(target=uvicorn.run, args=(self.api, ), kwargs={"port":self.port, "reload":True, "host":"0.0.0.0"})
         run_thread.start()
         if not self.running:
             run_thread.join()

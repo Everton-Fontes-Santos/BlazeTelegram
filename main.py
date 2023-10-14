@@ -90,10 +90,11 @@ async def main():
     api.register(health)
     api.init_presenter()
     
+    await api.listen()
     
     await asyncio.gather(
         asyncio.create_task(check_by_five()),
-        asyncio.create_task(api.listen(False)),
+        # asyncio.create_task(api.listen(False)),
         asyncio.create_task(presenter.listen()),
     )    
 
