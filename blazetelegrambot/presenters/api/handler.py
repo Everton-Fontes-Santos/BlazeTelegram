@@ -6,7 +6,7 @@ from ...interfaces.api_handler import APIHandler
 class HealthCheckHandler(APIHandler):
     path:str = '/healthcheck'
     method:str = 'GET'
-    response_model = None
+    response_model:dict = None
     
     def get_callback(self) -> Coroutine:
         
