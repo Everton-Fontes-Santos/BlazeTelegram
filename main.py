@@ -13,13 +13,13 @@ from blazetelegrambot.services.factorys import (
 )
 from blazetelegrambot.dispatchers.MemoryDispatcher import MemoryDispatcher
 from blazetelegrambot.presenters.roulette_updater import RouletteUpdater
-from blazetelegrambot.services.config import TelegramConfig, APIConfig
+from blazetelegrambot.services.config import TelegramConfig
 from blazetelegrambot.presenters.api.api_presenter import FastAPIPresenter
 from blazetelegrambot.presenters.api.handler import HealthCheckHandler
 
 from datetime import datetime
 import asyncio
-
+from fastapi import FastAPI
 
 async def main():
     config = TelegramConfig()
@@ -84,9 +84,8 @@ async def main():
     sender_handler.addIds('white', True, config.WHITE_FREE_GROUP)
     
     mediator.register(sender_handler)
-
-    api_config = APIConfig()
-    api = FastAPIPresenter(port=api_config.PORT)
+    app = FastAPI()
+    api = FastAPIPresenter(port=config.PORT, api=app)
     health = HealthCheckHandler()
     api.register(health)
     api.init_presenter()
@@ -98,7 +97,6 @@ async def main():
         asyncio.create_task(presenter.listen()),
     )    
 
-    await presenter.listen()
 
 
 async def check_by_five():

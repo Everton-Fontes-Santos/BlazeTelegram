@@ -15,3 +15,4 @@ class TelegramConfig(BaseSettings):
     COLOR_PAID_GROUP:int
     WHITE_FREE_GROUP:str
     COLOR_FREE_GROUP:str
+    PORT:int
